@@ -5,13 +5,13 @@ from app import models
 
 @app.route('/')
 def index():
-    return render_template('shop.html')
+    return render_template('admin.html')
 
-@app.route('/product')
+'''@app.route('/product')
 def product():
     return render_template('product.html')
 
-@app.error_handler(404)
+@app.error_handler_spec(404)
 def page_not_found():
     return render_template('page_not_found.html')
 
@@ -29,4 +29,4 @@ def add():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    return render_template('admin.html')'''

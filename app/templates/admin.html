@@ -1,0 +1,43 @@
+<html>
+	<head>
+	<title>Панель администратора</title>
+	<link rel="stylesheet" href="styles.css" type="text/css">
+	<script type="text/javascript" src="jquery-2.1.1.js"></script>
+	</head>
+	<body>
+	<div id="leftbar">
+		<div id="navigation">
+			<a class='navelement' onclick="$('#vieshop:hidden').show()">Просмотреть товары</a>
+			<a class='navelement' onclick="$('#addtoshop:hidden').show()">Добавить товар</a>
+		</div>
+	</div>
+	<div id="mainbar">
+		<div id="vieshop">
+			<div align = "center">Просмотр товаров</div>
+		</div>
+		<div id="addtoshop">
+			<div align = "center">Добавить товар</div>
+			<div id="addtoshop_form">
+				<table style="width: 100%">
+					<tr>
+						<td width="150px">Название товара</td>
+						<td><input type="text" name="addtoshop_name" id="addtoshop_name" style="width: 100%" /></td>
+					</tr>
+					<tr>
+						<td>Описание товара</td>
+						<td><textarea name="addtoshop_about" id="addtoshop_about" rows="16" style="width: 100%" /></textarea></td>
+					</tr>
+					<tr>
+						<td>Цена товара</td>
+						<td><input type="text" name="addtoshop_price" id="addtoshop_price" /></td>
+					</tr>
+						<td>Изображение товара</td>
+						<td><input type="file" name="addtoshop_image" id="addtoshop_image" /></td>
+					</tr>
+						<td><input type="submit" name="addtoshop_send" id="addtoshop_send" /></td>
+					</tr>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

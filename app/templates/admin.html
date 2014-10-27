@@ -1,19 +1,19 @@
-<html>
-	<head>
-	<title>Панель администратора</title>
+{% extends 'outlay.html' %}
+{% block head %}
 	<link rel="stylesheet" href="styles.css" type="text/css">
 	<script type="text/javascript" src="jquery-2.1.1.js"></script>
-	</head>
-	<body>
+    {% block title %}Control Bar{% endblock %}
+{% endblock %}
+{% block content %}
 	<div id="leftbar">
 		<div id="navigation">
-			<a class='navelement' onclick="$('#vieshop:hidden').show()">Vie items</a>
+			<a class='navelement' onclick="$('#vieshop:hidden').show()">View items</a>
 			<a class='navelement' onclick="$('#addtoshop:hidden').show()">Add item</a>
 		</div>
 	</div>
 	<div id="mainbar">
 		<div id="vieshop">
-			<div align = "center">Vie items</div>
+			<div align = "center">View items</div>
 		</div>
 		<div id="addtoshop">
 			<div align = "center">Add item</div>
@@ -24,20 +24,20 @@
 						<td><input type="text" name="addtoshop_name" id="addtoshop_name" style="width: 100%" /></td>
 					</tr>
 					<tr>
-						<td>About item</td>
+						<td>Description</td>
 						<td><textarea name="addtoshop_about" id="addtoshop_about" rows="16" style="width: 100%" /></textarea></td>
 					</tr>
 					<tr>
 						<td>Item price</td>
 						<td><input type="text" name="addtoshop_price" id="addtoshop_price" /></td>
 					</tr>
-						<td>Item image</td>
+						<td>Item picture</td>
 						<td><input type="file" name="addtoshop_image" id="addtoshop_image" /></td>
 					</tr>
 						<td><input type="submit" name="addtoshop_send" id="addtoshop_send" /></td>
 					</tr>
+                </table>
 			</div>
 		</div>
 	</div>
-	</body>
-</html>
+{% endblock %}

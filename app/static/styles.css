@@ -1,0 +1,25 @@
+#leftbar {
+	width: 250px;
+	float: left;
+}
+
+#mainbar {
+	margin-left: 260px;
+}
+
+.navelement {
+	border: 1px solid #000;
+	margin: 2px;
+	padding: 4px;
+	font-size: 10px;
+	font-weight: bold;
+	display: block;
+}
+
+#vieshop {
+	display:none;
+}
+
+#addtoshop {
+	display:none;
+}

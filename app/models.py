@@ -2,8 +2,8 @@ import json
 
 
 class Product:
-    def __init__(self, n_id = 0, n_name="", n_description="", n_price=0, n_path_photo=""):
-        self.id = n_id
+    def __init__(self, n_name="Empty", n_description="Empty", n_price=0, n_path_photo="Empty"):
+        self.id = 0
         self.name = n_name
         self.description = n_description
         self.path_photo = n_path_photo
@@ -11,7 +11,6 @@ class Product:
 
     def to_json(self):
         return {
-            "id": self.id,
             "name": self.name,
             "description": self.description,
             "price": str(self.price),
@@ -19,12 +18,11 @@ class Product:
         }
 
     def from_json(self, inp_json):
-        parsed = json.loads(inp_json)
-        self.id = parsed['id']
-        self.name = parsed['name']
-        self.description = parsed['description']
-        self.path_photo = parsed['photo']
-        self.price = parsed['price']
+        self.id = inp_json['id']
+        self.name = inp_json['name']
+        self.description = inp_json['description']
+        self.path_photo = inp_json['photo']
+        self.price = inp_json['price']
 
 
 class Basket:

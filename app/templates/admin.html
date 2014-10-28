@@ -1,42 +1,48 @@
 {% extends 'outlay.html' %}
+{% block title %}Control Bar{% endblock %}
 {% block head %}
 	<link rel="stylesheet" href="/static/styles.css" type="text/css">
 	<script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
+<<<<<<< HEAD
     {% block title %}Control Bar{% endblock %}
+=======
+>>>>>>> origin/master
 {% endblock %}
 {% block content %}
 	<div id="leftbar">
 		<div id="navigation">
-			<a class='navelement' onclick="$('#vieshop:hidden').show()">View items</a>
-			<a class='navelement' onclick="$('#addtoshop:hidden').show()">Add item</a>
+			<a class='navelement' onclick="$('#viewshop:hidden').show()">View items</a>
+			<a class='navelement' onclick="$('#add_to_shop:hidden').show()">Add item</a>
 		</div>
 	</div>
 	<div id="mainbar">
-		<div id="vieshop">
+		<div id="viewshop">
 			<div align = "center">View items</div>
 		</div>
-		<div id="addtoshop">
+		<div id="add_to_shop">
 			<div align = "center">Add item</div>
-			<div id="addtoshop_form">
+			<div id="add_to_shop_form">
+                <form action="/add" enctype="multipart/form-data" method="post">
 				<table style="width: 100%">
 					<tr>
 						<td width="150px">Item name</td>
-						<td><input type="text" name="addtoshop_name" id="addtoshop_name" style="width: 100%" /></td>
+						<td><input type="text" name="add_to_shop_name" id="add_to_shop_name" style="width: 100%" /></td>
 					</tr>
 					<tr>
 						<td>Description</td>
-						<td><textarea name="addtoshop_about" id="addtoshop_about" rows="16" style="width: 100%" /></textarea></td>
+						<td><textarea name="add_to_shop_about" id="add_to_shop_about" rows="16" style="width: 100%" /></textarea></td>
 					</tr>
 					<tr>
 						<td>Item price</td>
-						<td><input type="text" name="addtoshop_price" id="addtoshop_price" /></td>
+						<td><input type="text" name="add_to_shop_price" id="add_to_shop_price" /></td>
 					</tr>
 						<td>Item picture</td>
-						<td><input type="file" name="addtoshop_image" id="addtoshop_image" /></td>
+						<td><input type="file" name="add_to_shop_image" id="add_to_shop_image"  /></td>
 					</tr>
-						<td><input type="submit" name="addtoshop_send" id="addtoshop_send" /></td>
+						<td><input type="submit" name="add_to_shop_send" id="add_to_shop_send" value="Upload" /></td>
 					</tr>
                 </table>
+                </form>
 			</div>
 		</div>
 	</div>

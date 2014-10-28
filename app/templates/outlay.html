@@ -4,8 +4,24 @@
     <title>{% block title %}{% endblock %}</title>
     {% block head %}
     <meta charset="UTF-8">
+		<link rel="stylesheet" href="static/styles.css" type="text/css">
+		<script type="text/javascript" src="static/jquery-2.1.1.js"></script>
     {% endblock %}
-</head>
+    <div class="wrapper">
+			<div class="header">
+				<div class="logo">
+					<img src="static/images/header/logo.png" height="120">
+				</div>
+				<div class="logotype">
+					NextShop!
+				</div>
+				<div class="buy">
+				<span class="buystyle">Your bag</span>
+				<img src="static/images/header/icon-basket.gif" />
+			</div>
+		</div>
+	</div>
+
 <body>
     {% block content %}
     {% endblock %}

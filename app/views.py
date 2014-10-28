@@ -7,7 +7,7 @@ from app import db
 database = db.DBwork()
 
 # APP_ROOT = os.path.join(os.path.abspath(__file__))
-UPLOADER_FOLDER = './app/static/images/products'
+UPLOADER_FOLDER = './app/static/images/products/'
 app.config['UPLOAD_FOLDER'] = UPLOADER_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -37,9 +37,15 @@ def login():
     else:
         return
 
-@app.route('/product')
-def product():
-    return render_template('product.html')
+@app.route('/product/<int:product_id>', methods=['GET'])
+def product(product_id):
+    product_db = database.get_product(product_id)
+
+    return render_template('product.html',
+                           name=product_db['name'],
+                           address=product_db['photo'],
+                           description=product_db['description'],
+                           price=product_db['price'])
 
 @app.route('/basket')
 def basket():
@@ -57,8 +63,8 @@ def add():
         image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
 
         database.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
-                         request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER']+image.filename))
-    return redirect('/')
+                     request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
+    return redirect('/product/0')
 
 @app.route('/')
 @app.route('/admin')

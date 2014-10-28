@@ -13,7 +13,7 @@ class DBwork:
         product_id = {
             "id": self.count
         }
-        self.db.products.insert(dict(list(product_id.items()) + list(new_product.to_json().items())))
+        self.db.products.insert(dict(list(product1_id.items()) + list(new_product.to_json().items())))
 
     def remove(self, product):
         self.db.products.remove(product.to_json())

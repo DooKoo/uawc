@@ -18,7 +18,7 @@
 				<div class="buy" onclick="document.location.href = '/cart';" style="cursor:pointer;">
 				<span class="buystyle">Your cart</span>
 				<img src="static/images/header/icon-basket.gif" />
-                    <span style="font-size:14px; color:red">0</span>
+                    <span style="font-size:14px; color:red">{% block number %}0{% endblock %}</span>
 			</div>
 		</div>
 	</div>

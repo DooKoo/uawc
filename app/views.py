@@ -71,7 +71,7 @@ def add():
 
         database.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
                      request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
-    return redirect('/product/0')
+    return redirect('/0')
 
 
 @app.route('/test')

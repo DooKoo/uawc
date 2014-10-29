@@ -1,6 +1,7 @@
 {% extends 'outlay.html' %}
 {% block title %}NextShop!{% endblock %}
 {% block head %}
+        {{super()}}
 		<link rel="stylesheet" href="product_styles.css" type="text/css">
 		<link rel="stylesheet" href="styles.css" type="text/css">
         <script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
@@ -29,5 +30,5 @@
 				</div>
 			</div>
 		</div>
-	</body>
-</html>
+{% endblock %}
+

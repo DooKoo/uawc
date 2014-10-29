@@ -49,25 +49,12 @@ def page_not_found(error):
     return render_template('page_not_found.html')
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if validate(username, password):
-            session['username'] = username
-            return redirect('/admin')
-    else:
-        return redirect('/test')
-
-
 @app.route('/product=<int:product_id>', methods=['GET'])
 def product(product_id):
     sign_in()
 
     global CARTS
     cart_session = CARTS[session['id']]
-
 
     product_db = DATABASE.get_product(product_id)
     product_db['views'] += 1
@@ -81,28 +68,20 @@ def product(product_id):
                            id=product_db['id'])
 
 
-@app.route('/logout')
-def logout():
-    global USERS_ON_SITE
-    global CARTS
-
-    USERS_ON_SITE -= 1
-
-    del CARTS[session['id']]
-    session.clear()
-
-    return redirect('/catalog')
-
 
 @app.route('/cart')
 def cart():
-
+    global CARTS
+    cart_session = CARTS
     sign_in()
     cart_session = CARTS.get(session['id'])
-
+    total_price = 0
+    for item in cart_session.items:
+        total_price += int(item.price)
     return render_template('cart.html',
-                           cart=cart_session)
-
+                           cart=cart_session,
+                           total_price=total_price,
+                           number_of_items=cart_session.num_of_items)
 
 @app.route('/checkout')
 def checkout():
@@ -130,6 +109,7 @@ def add_to_cart():
         CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
     return redirect(request.form['from'])
 
+
 @app.route('/catalog')
 def catalog():
     sign_in()
@@ -150,3 +130,27 @@ def admin():
     else:
         return render_template('login.html', invisible_overwrite='')
 
+
+@app.route('/login', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if validate(username, password):
+            session['username'] = username
+            return redirect('/admin')
+    else:
+        return redirect('/test')
+
+
+@app.route('/logout')
+def logout():
+    global USERS_ON_SITE
+    global CARTS
+
+    USERS_ON_SITE -= 1
+
+    del CARTS[session['id']]
+    session.clear()
+
+    return redirect('/catalog')

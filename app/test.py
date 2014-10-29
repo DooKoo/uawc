@@ -4,8 +4,13 @@ from collections import OrderedDict
 import random
 
 test = db.DBwork()
-prod = models.Product()
-prod.from_json(test.get_product(5))
-test.update_product(5, prod)
+
+cart = models.Cart()
+prod = models.Product.from_json(test.get_product(0))
+print(prod)
+cart.add(prod)
+print(cart.items)
+cart.buy()
+
 
 

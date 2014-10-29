@@ -13,9 +13,9 @@ class Product:
         self.num_buys = 0
         self.num_views = 0
         self.num_carts = 0
-        self.bought_with = {}
-        self.viewed_with = {}
-        self.basket_with = {}
+        self.bought_with = []
+        self.viewed_with = []
+        self.cart_with = []
 
     def to_json(self):
         return {
@@ -28,7 +28,7 @@ class Product:
             "carts": self.num_carts,
             "bought_with": self.bought_with,
             "viewed_with": self.viewed_with,
-            "basket_with": self.basket_with,
+            "basket_with": self.cart_with,
         }
 
     def to_view(self):
@@ -52,7 +52,7 @@ class Product:
         result.num_carts = inp_json['carts']
         result.bought_with = inp_json['bought_with']
         result.viewed_with = inp_json['viewed_with']
-        result.basket_with = inp_json['basket_with']
+        result.cart_with = inp_json['basket_with']
         return result
 
     #type_dict define which dictionary we use.
@@ -62,7 +62,7 @@ class Product:
         elif type_dict is 2:
             tmp = self.viewed_with
         elif type_dict is 3:
-            tmp = self.basket_with
+            tmp = self.cart_with
         else:
             return 0
 
@@ -79,7 +79,7 @@ class Product:
         elif type_with is 2:
             tmp = self.viewed_with
         elif type_with is 3:
-            tmp = self.basket_with
+            tmp = self.cart_with
         else:
             return 0
 
@@ -92,7 +92,7 @@ class Product:
         return result
 
 
-class Basket:
+class Cart:
     def __init__(self):
         self.num_of_items = 0
         self.items = []
@@ -100,13 +100,17 @@ class Basket:
     def add(self, new_item):
         self.items.append(new_item)
         for item in self.items:
-            item.basket_with.append(new_item)
-            new_item.basket_with.append(item)
+            item.basket_with.append(new_item.id)
+            new_item.basket_with.append(item.id)
         self.num_of_items += 1
 
     #will write
     def buy(self):
-        pass
+        for item in self.items:
+            for prod in self.items:
+                item.buys_with.append(prod.id)
+            item.buys += 1
+            self.items.clear()
 
     #will write
     def remove(self):

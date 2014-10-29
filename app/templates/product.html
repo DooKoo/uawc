@@ -23,15 +23,43 @@
 			<div class="add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{id}})" /></div>
 			</div>
 		</div>
+{% endblock %}
+{% block recommended %}
+        {% for item in list_bought %}
 		<div id="recommended">
 			<div id="recommended_item">
-				<div id="recommended_item_image"><img src="mein-deal-com297.jpg" width="80"></div>
+				<div id="recommended_item_image"><img src={{item.photo}} width="80"></div>
 				<div id="recommended_item_text">
-					<div id="recommended_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-					<div id="recommended_price"><b>$139.00</b></div>
+					<div id="recommended_name">{{item.name}}</div>
+					<div id="recommended_price"><b>{{item.price}}</b></div>
 					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart2" value="Add to cart" onclick="add_to_cart({{id}});"/></div>
 				</div>
 			</div>
 		</div>
+        {% endfor %}
+        {% for item in list_viewed %}
+        <div id="recommended">
+			<div id="recommended_item">
+				<div id="recommended_item_image"><img src={{item.photo}} width="80"></div>
+				<div id="recommended_item_text">
+					<div id="recommended_name">{{item.name}}</div>
+					<div id="recommended_price"><b>{{item.price}}</b></div>
+					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart2" value="Add to cart" onclick="add_to_cart({{id}});"/></div>
+				</div>
+			</div>
+		</div>
+        {% endfor %}
+        {% for item in list_put %}
+        <div id="recommended">
+			<div id="recommended_item">
+				<div id="recommended_item_image"><img src={{item.photo}} width="80"></div>
+				<div id="recommended_item_text">
+					<div id="recommended_name">{{item.name}}</div>
+					<div id="recommended_price"><b>{{item.price}}</b></div>
+					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart2" value="Add to cart" onclick="add_to_cart({{id}});"/></div>
+				</div>
+			</div>
+		</div>
+        {% endfor %}
 {% endblock %}
 

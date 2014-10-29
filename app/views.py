@@ -58,6 +58,17 @@ def product(product_id):
 
     product_db = DATABASE.get_product(product_id)
     product_db['views'] += 1
+    list_bought = []
+    list_viewed = []
+    list_put = []
+
+    for product_id in models.Product.from_json(product_db).get_products_with(1):
+        list_bought.append(DATABASE.get_product(product_id))
+    for product_id in models.Product.from_json(product_db).get_products_with(2):
+        list_viewed.append(DATABASE.get_product(product_id))
+    for product_id in models.Product.from_json(product_db).get_products_with(3):
+        list_put.append(DATABASE.get_product(product_id))
+
     DATABASE.update_product(product_id, models.Product.from_json(product_db))
     return render_template('product.html',
                            name=product_db['name'],
@@ -65,7 +76,10 @@ def product(product_id):
                            description=product_db['description'],
                            price=product_db['price'],
                            number_of_items=cart_session.num_of_items,
-                           id=product_db['id'])
+                           id=product_db['id'],
+                           list_bought=list_bought,
+                           list_viewed=list_viewed,
+                           list_put=list_put)
 
 
 
@@ -98,7 +112,7 @@ def add():
         DATABASE.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
                      request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
 
-    return redirect('/product=5')
+    return redirect('/admin')
 
 
 @app.route('/add_to_cart', methods=['POST'])

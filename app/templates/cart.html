@@ -1,8 +1,10 @@
-<html>
-	<head>
-	<link rel="stylesheet" href="cart_styles.css" type="text/css">
-	</head>
-	<body>
+{% extends 'outlay.html' %}
+{% block head %}
+	<link rel="stylesheet" href="static/cart_styles.css" type="text/css">
+
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
 		<div class="cart_items">
 			<div id="cart_item">
 				<div id="cart_item_image">
@@ -32,8 +34,7 @@
 					<div id="remove_item"><input type="button" id="remove_button" name="remove_button" value="Remove" /></div>
 				</div>
 			</div>
-			<div class="sum">In summ: </div>
+			<div class="sum">Total price: </div>
 			<div class="buy"><input type="button" id="buy_button" name="buy_button" value="Buy" /></div>
 		</div>
-	</body>
-</html>
+{% endblock %}

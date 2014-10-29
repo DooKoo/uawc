@@ -3,6 +3,9 @@ from app import app
 from flask import request, render_template, session, flash, redirect, escape
 from app import models
 from app import db
+from werkzeug.exceptions import HTTPException, NotFound
+from werkzeug.wsgi import responder
+from werkzeug.wrappers import BaseRequest
 
 database = db.DBwork()
 
@@ -22,6 +25,11 @@ def validate(user, passw):
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
+def view(request):
+    raise NotFound()
+
 
 
 @app.errorhandler(404)
@@ -44,7 +52,8 @@ def login():
 @app.route('/product=<int:product_id>', methods=['GET'])
 def product(product_id):
     product_db = database.get_product(product_id)
-
+    product_db['views'] += 1
+    database.update_product(product_id, models.Product.from_json(product_db))
     return render_template('product.html',
                            name=product_db['name'],
                            address=product_db['photo'],
@@ -52,9 +61,9 @@ def product(product_id):
                            price=product_db['price'])
 
 
-@app.route('/basket')
+@app.route('/cart')
 def basket():
-    return render_template('basket.html')
+    return render_template('cart.html')
 
 
 @app.route('/checkout')
@@ -71,7 +80,13 @@ def add():
 
         database.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
                      request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
-    return redirect('/0')
+
+    return redirect('/product=5')
+
+
+@app.route('/catalog')
+def catalog():
+    return render_template('catalog.html')
 
 
 @app.route('/test')

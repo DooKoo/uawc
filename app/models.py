@@ -12,6 +12,7 @@ class Product:
         self.price = n_price
         self.num_buys = 0
         self.num_views = 0
+        self.num_carts = 0
         self.bought_with = {}
         self.viewed_with = {}
         self.basket_with = {}
@@ -24,6 +25,7 @@ class Product:
             "photo": self.path_photo,
             "buys": self.num_buys,
             "views": self.num_views,
+            "carts": self.num_carts,
             "bought_with": self.bought_with,
             "viewed_with": self.viewed_with,
             "basket_with": self.basket_with,
@@ -45,6 +47,9 @@ class Product:
         result.description = inp_json['description']
         result.path_photo = inp_json['photo']
         result.price = inp_json['price']
+        result.num_views = inp_json['views']
+        result.num_buys = inp_json['buys']
+        result.num_carts = inp_json['carts']
         result.bought_with = inp_json['bought_with']
         result.viewed_with = inp_json['viewed_with']
         result.basket_with = inp_json['basket_with']

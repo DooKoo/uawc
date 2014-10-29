@@ -1,0 +1,63 @@
+.random {
+	width: 300px;
+}
+
+.about_item  {
+	margin-left: 200px;
+	margin-bottom: 50px;
+	margin-top: 40px;
+	min-height: 370px;
+}
+
+.left {
+	width: 200px;
+	float: left;
+}
+
+.right {
+	margin-left: 210px;
+}
+
+.item_image {
+	
+}
+
+.name {
+	font-size: 20px;
+	font-style: bold;
+	color: blue;
+}
+
+.price {
+	font-size: 26px;
+	color: red;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.description {
+}
+
+.add2card_button {
+	margin: 15px;
+}
+
+#recommended {
+	margin-left: 200px;
+}
+
+#recommended_item {
+	width: 25%;
+}
+
+#recommended_item_image {
+	float: left;
+}
+
+#recommended_item_text {
+	margin-left: 85px;
+}
+
+#recommended_price {
+	color: red;
+}

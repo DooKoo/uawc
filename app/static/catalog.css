@@ -1,0 +1,26 @@
+.page {
+	margin: 0 12.5% 0;
+}
+
+#item-left {
+	width: 33%;
+	float: left;
+}
+
+#item-center {
+	margin-left: 33.5%;
+	width: 33%;
+}
+
+#item-right {
+	width: 33%;
+	float: right;
+}
+
+#item_image {
+	
+}
+
+#item_text {
+	margin-top: 20px;
+}

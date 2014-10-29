@@ -1,38 +1,28 @@
 {% extends 'outlay.html' %}
 {% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="static/styles1.css" type="text/css">
 	<link rel="stylesheet" href="static/cart_styles.css" type="text/css">
 {% endblock %}
 {% block content %}
-		<div class="cart_items">
-			<div id="cart_item">
+<div class="cart_items">
+		{% for item in cart.items %}
+        <div id="cart_item">
 				<div id="cart_item_image">
-					<img src="mein-deal-com297.jpg" height="100" />
+					<img src="{{item.path_photo}}" height="100" />
 				</div>
 				<div id="cart_item_info">
 					<div id="cart_item_name">
-						HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz
+						{{item.name}}
 					</div>
 					<div id="cart_item_price">
-					$139.00
-					</div>
-					<div id="remove_item"><input type="button" id="remove_button" name="remove_button" value="Remove" /></div>
-				</div>
-			</div>
-			<div id="cart_item">
-				<div id="cart_item_image">
-					<img src="mein-deal-com297.jpg" height="100" />
-				</div>
-				<div id="cart_item_info">
-					<div id="cart_item_name">
-						HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz
-					</div>
-					<div id="cart_item_price">
-					$139.00
+					{{item.price}}
 					</div>
 					<div id="remove_item"><input type="button" id="remove_button" name="remove_button" value="Remove" /></div>
 				</div>
 			</div>
 			<div class="sum">Total price: </div>
 			<div class="buy"><input type="button" id="buy_button" name="buy_button" value="Buy" /></div>
+        {% endfor %}
 		</div>
 {% endblock %}

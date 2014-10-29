@@ -66,7 +66,8 @@ def product(product_id):
     sign_in()
 
     global CARTS
-    cart = CARTS[session['id']]
+    cart_session = CARTS[session['id']]
+
 
     product_db = DATABASE.get_product(product_id)
     product_db['views'] += 1
@@ -76,7 +77,7 @@ def product(product_id):
                            address=product_db['photo'],
                            description=product_db['description'],
                            price=product_db['price'],
-                           number_of_items=cart.num_of_items,
+                           number_of_items=cart_session.num_of_items,
                            id=product_db['id'])
 
 
@@ -94,11 +95,13 @@ def logout():
 
 
 @app.route('/cart')
-def basket():
+def cart():
 
     sign_in()
-    cart = CARTS
-    return render_template('cart.html')
+    cart_session = CARTS.get(session['id'])
+
+    return render_template('cart.html',
+                           cart=cart_session)
 
 
 @app.route('/checkout')
@@ -124,8 +127,8 @@ def add_to_cart():
     global CARTS
     if request.method == 'POST':
         product_id = request.form['id']
-        CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(product_id)))
-
+        CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
+    return redirect(request.form['from'])
 
 @app.route('/catalog')
 def catalog():

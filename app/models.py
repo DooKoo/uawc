@@ -55,12 +55,23 @@ class Product:
         result.cart_with = inp_json['cart_with']
         return result
 
-    #type_dict define which dictionary we use.
-    def add_cart_with(self, type_dict, product_id):
+    def add_cart_with(self, product_id):
         if str(product_id) in self.cart_with.keys():
             self.cart_with[str(product_id)] += 1
         else:
             self.cart_with[str(product_id)] = 1
+
+    def add_buys_with(self, product_id):
+        if str(product_id) in self.bought_with.keys():
+            self.bought_with[str(product_id)] += 1
+        else:
+            self.bought_with[str(product_id)] = 1
+
+    def add_viewed_with(self, product_id):
+        if str(product_id) in self.viewed_with.keys():
+            self.viewed_with[str(product_id)] += 1
+        else:
+            self.viewed_with[str(product_id)] = 1
 
     def get_products_with(self, type_with):
         if type_with is 1:
@@ -75,9 +86,12 @@ class Product:
         sorted_tmp = list(OrderedDict(sorted(tmp.items(), key=itemgetter(1))).keys())[:10]
         result = []
         for i in range(0, 4):
-            choice = random.choice(sorted_tmp)
-            result.append(choice)
-            sorted_tmp.remove(choice)
+            if len(sorted_tmp) != 0:
+                choice = random.choice(sorted_tmp)
+                result.append(choice)
+                sorted_tmp.remove(choice)
+            else:
+                result = [0, 1, 2, 3,]
         return result
 
 
@@ -88,18 +102,24 @@ class Cart:
 
     def add(self, new_item):
         self.items.append(new_item)
+        new_item.num_carts += 1
         for item in self.items:
-            item.add_cart_with(3, new_item.id)
-            new_item.add_cart_with(3,item.id)
+            if item != new_item:
+                item.add_cart_with(new_item.id)
+                new_item.add_cart_with(item.id)
         self.num_of_items += 1
 
-    #need test
+    #need a test
     def buy(self):
         for item in self.items:
+            item.num_buys += 1
             for item2 in self.items:
                 if item != item2:
-                    pass
+                    item.add_buys_with(item2.id)
+        self.items.clear()
 
-    #will write
-    def remove(self):
-        pass
+    def remove(self, product):
+        for item in self.items:
+            if item == product:
+                self.items.remove(item)
+                self.num_of_items -=1

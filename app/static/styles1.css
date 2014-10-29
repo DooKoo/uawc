@@ -16,8 +16,14 @@
 
 .logotype {
 	font-size: 72px;
+	color: white;
 	float: left;
 	font-style: italic;
+	text-shadow:
+    	-3px -3px 0 red,
+    	3px -3px 0 red,
+    	-3px 3px 0 red,
+    	3px 3px 0 red;
 	margin-top: 35px;
 	margin-left: 35px;
 }

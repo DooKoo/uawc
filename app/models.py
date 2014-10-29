@@ -37,15 +37,18 @@ class Product:
             "photo": self.path_photo
         }
 
-    def from_json(self, inp_json):
-        self.id = inp_json['id']
-        self.name = inp_json['name']
-        self.description = inp_json['description']
-        self.path_photo = inp_json['photo']
-        self.price = inp_json['price']
-        self.bought_with = inp_json['bought_with']
-        self.viewed_with = inp_json['viewed_with']
-        self.basket_with = inp_json['basket_with']
+    @staticmethod
+    def from_json(inp_json):
+        result = Product()
+        result.id = inp_json['id']
+        result.name = inp_json['name']
+        result.description = inp_json['description']
+        result.path_photo = inp_json['photo']
+        result.price = inp_json['price']
+        result.bought_with = inp_json['bought_with']
+        result.viewed_with = inp_json['viewed_with']
+        result.basket_with = inp_json['basket_with']
+        return result
 
     #type_dict define which dictionary we use.
     def add_with(self, type_dict, product_id):

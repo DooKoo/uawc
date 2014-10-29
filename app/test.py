@@ -6,11 +6,13 @@ import random
 test = db.DBwork()
 
 cart = models.Cart()
+#test.remove(0)
+
 prod = models.Product.from_json(test.get_product(0))
-print(prod)
-cart.add(prod)
-print(cart.items)
-cart.buy()
-
-
-
+prod.add_cart_with(1, 5)
+prod.add_cart_with(1, 5)
+prod.add_cart_with(1, 5)
+prod.add_cart_with(1, 5)
+print(prod.cart_with.items())
+#cart.add(prod)
+#test.update_product(0, prod)

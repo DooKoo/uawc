@@ -13,9 +13,9 @@ class Product:
         self.num_buys = 0
         self.num_views = 0
         self.num_carts = 0
-        self.bought_with = []
-        self.viewed_with = []
-        self.cart_with = []
+        self.bought_with = {}
+        self.viewed_with = {}
+        self.cart_with = {}
 
     def to_json(self):
         return {
@@ -28,7 +28,7 @@ class Product:
             "carts": self.num_carts,
             "bought_with": self.bought_with,
             "viewed_with": self.viewed_with,
-            "basket_with": self.cart_with,
+            "cart_with": self.cart_with,
         }
 
     def to_view(self):
@@ -52,26 +52,15 @@ class Product:
         result.num_carts = inp_json['carts']
         result.bought_with = inp_json['bought_with']
         result.viewed_with = inp_json['viewed_with']
-        result.cart_with = inp_json['basket_with']
+        result.cart_with = inp_json['cart_with']
         return result
 
     #type_dict define which dictionary we use.
-    def add_with(self, type_dict, product_id):
-        if type_dict is 1:
-            tmp = self.bought_with
-        elif type_dict is 2:
-            tmp = self.viewed_with
-        elif type_dict is 3:
-            tmp = self.cart_with
+    def add_cart_with(self, type_dict, product_id):
+        if str(product_id) in self.cart_with.keys():
+            self.cart_with[str(product_id)] += 1
         else:
-            return 0
-
-        for key in tmp.keys():
-            if key is product_id:
-                tmp[key] += 1
-                break
-        tmp[str(product_id)] = 1
-        return 1
+            self.cart_with[str(product_id)] = 1
 
     def get_products_with(self, type_with):
         if type_with is 1:
@@ -100,17 +89,16 @@ class Cart:
     def add(self, new_item):
         self.items.append(new_item)
         for item in self.items:
-            item.basket_with.append(new_item.id)
-            new_item.basket_with.append(item.id)
+            item.add_cart_with(3, new_item.id)
+            new_item.add_cart_with(3,item.id)
         self.num_of_items += 1
 
-    #will write
+    #need test
     def buy(self):
         for item in self.items:
-            for prod in self.items:
-                item.buys_with.append(prod.id)
-            item.buys += 1
-            self.items.clear()
+            for item2 in self.items:
+                if item != item2:
+                    pass
 
     #will write
     def remove(self):

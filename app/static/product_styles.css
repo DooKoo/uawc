@@ -3,7 +3,7 @@
 }
 
 .about_item  {
-	margin-left: 200px;
+	margin-left: 20px;
 	margin-bottom: 50px;
 	margin-top: 40px;
 	min-height: 370px;
@@ -15,7 +15,7 @@
 }
 
 .right {
-	margin-left: 210px;
+	margin-left: 265px;
 }
 
 .item_image {
@@ -43,7 +43,7 @@
 }
 
 #recommended {
-	margin-left: 200px;
+	margin-left: 20px;
 }
 
 #recommended_item {

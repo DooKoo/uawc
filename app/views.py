@@ -37,7 +37,7 @@ def login():
     else:
         return
 
-@app.route('/product/<int:product_id>', methods=['GET'])
+@app.route('/product=<int:product_id>', methods=['GET'])
 def product(product_id):
     product_db = database.get_product(product_id)
 

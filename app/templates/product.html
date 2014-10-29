@@ -1,31 +1,22 @@
-<<<<<<< HEAD
-<html>
-	<head>
+{% extends 'outlay.html' %}
+{% block title %}NextShop!{% endblock %}
+{% block head %}
 		<link rel="stylesheet" href="product_styles.css" type="text/css">
 		<link rel="stylesheet" href="styles.css" type="text/css">
-		<script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
-		<title>NextShop!</title>
-	</head>
-	<body>
-<!--{% extends 'outlay.html' %}
-{% block title %}{% endblock %}
-{% block head %}{% endblock %}
+        <script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
+{% endblock %}
 {% block content %}-->
 		<div class="random">
 		</div>
 		<div class="about_item">
 			<div class="left">
-				<div class="item_image"><img src="mein-deal-com297.jpg" width="200" height="366"></div>
+				<div class="item_image"><img src={{address}}" width="200" height="366"></div>
 			</div>
 			<div class="right">
-				<div class="name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-				<div class="price"><b>$139.00</b></div>
-				<div class="description">Product Features
-<li>BEATS AUDIO MODEL</li>
-Dimensions
-<li>Size (LWH): 0.39 inches, 2.6 inches, 5.2 inches</li>
-<li>Weight: 4.64 ounces</li></div>
-			<div class="add2card_button"><input type="button" name="add2card" id="add2card" value="Add to card" /></div>
+				<div class="name">{{name}}</div>
+				<div class="price"><b>{{price}}</b></div>
+				<div class="description">{{description}}</div>
+			<div class="add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
 			</div>
 		</div>
 		<div id="recommended">
@@ -34,24 +25,9 @@ Dimensions
 				<div id="recommended_item_text">
 					<div id="recommended_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
 					<div id="recommended_price"><b>$139.00</b></div>
-					<div id="recommended_add2card_button"><input type="button" name="add2card" id="add2card" value="Add to card" /></div>
+					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
 				</div>
 			</div>
 		</div>
 	</body>
 </html>
-<!--{% endblock %}-->
-=======
-        <link rel="stylesheet" href="static/styles1.css" type="text/css">
-		<script type="text/javascript" src="static/jquery-2.1.1.js"></script>
-{% extends 'outlay.html' %}
-{% block title %}{% endblock %}
-{% block head %}{% endblock %}
-
-{% block content %}
-    {{name}}
-    {{price}}
-    {{description}}
-    <img src="{{address}}">
-{% endblock %}
->>>>>>> origin/master

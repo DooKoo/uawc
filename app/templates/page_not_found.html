@@ -1,8 +1,8 @@
 {% extends 'outlay.html' %}
 {% block title %}Error 404{% endblock %}
-{% block head %}
-
+{% block head %}{{super()}}
 {% endblock %}
+{% block header %}{% endblock %}
 {% block content %}
-        <img src="/static/images/other/sad_face.png" alt="page not found :'(" width="100%" >
+        <img src="/static/images/other/sad_face.png" alt="page not found :'(" id="bg" >
 {% endblock %}

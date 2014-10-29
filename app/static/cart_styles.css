@@ -1,0 +1,40 @@
+.cart_items {
+	margin-left: 200px;
+}
+
+#cart_item {
+	height: 120px;
+	border-bottom: 1px solid #000;
+}
+
+#cart_item_image {
+	margin:10px;
+	float: left;
+}
+
+#cart_item_name {
+	width: 85%;
+	font-size: 18px;
+	color: blue;
+	
+}
+
+#cart_item_price {
+	font-size: 16px;
+	color: red;
+	float: left;
+}
+
+#remove_item {
+	float: right;
+	margin-right: 100px;
+}
+
+
+.sum {
+	font-size: 26px;
+}
+
+.buy {
+	font-size: 26px;
+}

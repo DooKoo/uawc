@@ -37,7 +37,7 @@ def login():
     else:
         return
 
-@app.route('/product/<int:product_id>', methods=['GET'])
+@app.route('/product=<int:product_id>', methods=['GET'])
 def product(product_id):
     product_db = database.get_product(product_id)
 
@@ -65,6 +65,11 @@ def add():
         database.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
                      request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
     return redirect('/product/0')
+
+@app.route('/test')
+def test():
+    return render_template('outlay.html')
+
 
 @app.route('/')
 @app.route('/admin')

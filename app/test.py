@@ -1,7 +1,11 @@
 from app import models, db
+from operator import itemgetter
+from collections import OrderedDict
+import random
 
 test = db.DBwork()
-test.add(models.Product("iPhone 4", "Some details of iPhone 4", 3500, "/static/images/products/img_423675.png"))
-#prod = models.Product()
-#prod.from_json(test.get_product(1))
-#print(prod.to_json())
+prod = models.Product()
+prod.from_json(test.get_product(5))
+test.update_product(5, prod)
+
+

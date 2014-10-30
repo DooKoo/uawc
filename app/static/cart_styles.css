@@ -8,15 +8,21 @@
 }
 
 #cart_item_image {
+	width: 170px;
+	float: center;
 	margin:8px;
 	float: left;
+}
+
+#cart_item_info {
+	margin-left: 180px;
 }
 
 #cart_item_name {
 	width: 85%;
 	font-size: 18px;
 	color: blue;
-
+	
 }
 
 #cart_item_price {

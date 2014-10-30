@@ -66,11 +66,11 @@ def product(product_id):
     list_put = []
 
     for product_id in models.Product.from_json(product_db).get_products_with(1):
-        list_bought.append(DATABASE.get_product(product_id))
+        list_bought.append(DATABASE.get_product(int(product_id)))
     for product_id in models.Product.from_json(product_db).get_products_with(2):
-        list_viewed.append(DATABASE.get_product(product_id))
+        list_viewed.append(DATABASE.get_product(int(product_id)))
     for product_id in models.Product.from_json(product_db).get_products_with(3):
-        list_put.append(DATABASE.get_product(product_id))
+        list_put.append(DATABASE.get_product(int(product_id)))
 
     DATABASE.update_product(product_id, models.Product.from_json(product_db))
     return render_template('product.html',
@@ -129,10 +129,15 @@ def add():
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
+    print(1)
     global CARTS
+    print(2)
     if request.method == 'POST':
+        print(3)
         product_id = request.form['id']
+        print(product_id)
         CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
+        print(5)
     return redirect(request.form['from'])
 
 

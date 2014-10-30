@@ -92,7 +92,7 @@ class Product:
                 result.append(choice)
                 sorted_tmp.remove(choice)
             else:
-                result = [0, 1, 2, 3,]
+                result = [0, 1, 2, 3]
         return result
 
 

@@ -2,87 +2,46 @@
 {% block head %}
 	<link rel="stylesheet" href="/static/catalog.css" type="text/css">
     <link rel="stylesheet" href="/static/styles1.css" type="text/css">
+
 {% endblock %}
 {% block header %}{{super()}}{% endblock %}
 {% block content %}
 		<div class="page">
-			<div id="line">
-				<div id="item-right">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
+            <div id="line">
+                {% for item in line_1 %}
+				<div id="item">
+					<div id="item_image" align="center"><img src="{{item.photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
+						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
+						<div id="item_price"><b>{{item.price}}</b></div>
+						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
-				<div id="item-left">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
-					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
-					</div>
-				</div>
-				<div id="item-center">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
-					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
-					</div>
-				</div>
+                {% endfor %}
 			</div>
-			<div id="line">
-				<div id="item-right">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
+            <div id="line">
+                {% for item in line_2 %}
+				<div id="item">
+					<div id="item_image" align="center"><img src="{{item.photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
+						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
+						<div id="item_price"><b>{{item.price}}</b></div>
+						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
-				<div id="item-left">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
-					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
-					</div>
-				</div>
-				<div id="item-center">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
-					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
-					</div>
-				</div>
+                {% endfor %}
 			</div>
-			<div id="line">
-				<div id="item-right">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
+            <div id="line">
+                {% for item in line_3 %}
+				<div id="item">
+					<div id="item_image" align="center"><img src="{{item.photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
+						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
+						<div id="item_price"><b>{{item.price}}</b></div>
+						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
-				<div id="item-left">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
-					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
-					</div>
-				</div>
-				<div id="item-center">
-					<div id="item_image" align="center"><img src="mein-deal-com297.jpg" height="100"></div>
-					<div id="item_text">
-						<div id="item_name">HTC 8x c620E 16GB Unlocked GSM Smartphone - No Warranty - Black - GSM: 850/900/1800/1900 MHz; HSPA/WCDMA: 850/900/1900/2100 MHz</div>
-						<div id="item_price"><b>$139.00</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" /></div>
-					</div>
-				</div>
+                {% endfor %}
 			</div>
 		</div>
 {% endblock %}

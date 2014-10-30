@@ -145,10 +145,22 @@ def remove_from_cart(product_id):
     return "ok"
 
 
-@app.route('/catalog')
-def catalog():
+@app.route('/catalog=<int:page>')
+def catalog(page):
     sign_in()
-    return render_template('catalog.html')
+    id_products = DATABASE.get_catalog_products(page)
+    print(id_products)
+    products__ = []
+    for i in id_products:
+        products__.append(models.Product.from_json(DATABASE.get_product(i)))
+
+    products_line_1 = products__[:3]
+    products_line_2 = products__[3:6]
+    products_line_3 = products__[6:]
+    return render_template('catalog.html',
+                           line_1=products_line_1,
+                           line_2=products_line_2,
+                           line_3=products_line_3)
 
 
 @app.route('/test')

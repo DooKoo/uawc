@@ -44,10 +44,12 @@
 
 #recommended {
 	margin-left: 20px;
+	border-bottom: 1px solid #000;
 }
 
 #recommended_item {
 	width: 25%;
+	height: 130px;
 }
 
 #recommended_item_image {

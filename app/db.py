@@ -35,6 +35,9 @@ class DBwork:
 
     def get_catalog_products(self, page):
         tmp = self.db.products.find()
-        for item in tmp:
-            print(item)
+        all_products_info = []
+        for i in tmp:
+            all_products_info.append({'id': i['id'], 'buys': i['buys'], 'views': i['views'], 'carts': i['carts']})
+
+        print(all_products_info)
 

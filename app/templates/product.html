@@ -19,7 +19,7 @@
 			</div>
 			<div class="right">
 				<div class="name">{{name}}</div>
-				<div class="price"><b>{{price}}</b></div>
+				<div class="price"><b>${{price}}</b></div>
 				<div class="description">{{description}}</div>
 			<div class="add_to_cart_button"><input type="button" name="add_to_cart_button" id="add_to_cart_button" value="Add to cart" onclick="add_to_cart({{id}});"/></div>
 			</div>
@@ -32,7 +32,7 @@
 				<div id="recommended_item_image"><img src={{item.photo}} height="100"></div>
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
-					<div id="recommended_price"><b>{{item.price}}</b></div>
+					<div id="recommended_price"><b>${{item.price}}</b></div>
 					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}})"/></div>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 				<div id="recommended_item_image"><img src={{item.photo}} height="100"></div>
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
-					<div id="recommended_price"><b>{{item.price}}</b></div>
+					<div id="recommended_price"><b>${{item.price}}</b></div>
 					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 				<div id="recommended_item_image"><img src={{item.photo}} height="100"></div>
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
-					<div id="recommended_price"><b>{{item.price}}</b></div>
+					<div id="recommended_price"><b>${{item.price}}</b></div>
 					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
 				</div>
 			</div>

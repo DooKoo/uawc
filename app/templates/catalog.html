@@ -9,11 +9,11 @@
 		<div class="page">
             <div id="line">
                 {% for item in line_1 %}
-				<div id="item">
+				<div id="item" onclick="document.location.href = '/product={{item.id}}';">
 					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
-						<div id="item_price"><b>{{item.price}}</b></div>
+						<div id="item_name">{{item.name}}</div>
+						<div id="item_price"><b>${{item.price}}</b></div>
 						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
@@ -21,11 +21,11 @@
 			</div>
             <div id="line">
                 {% for item in line_2 %}
-				<div id="item">
+				<div id="item" onclick="document.location.href = '/product={{item.id}}';">
 					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
-						<div id="item_price"><b>{{item.price}}</b></div>
+						<div id="item_name">{{item.name}}</div>
+						<div id="item_price"><b>${{item.price}}</b></div>
 						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
@@ -33,11 +33,11 @@
 			</div>
             <div id="line">
                 {% for item in line_3 %}
-				<div id="item">
+				<div id="item" onclick="document.location.href = '/product={{item.id}}';">
 					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
-						<div id="item_price"><b>{{item.price}}</b></div>
+						<div id="item_name">{{item.name}}</div>
+						<div id="item_price"><b>${{item.price}}</b></div>
 						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>

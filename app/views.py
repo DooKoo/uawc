@@ -60,6 +60,7 @@ def product(product_id):
         return render_template('page_not_found.html')
 
     product_db['views'] += 1
+
     list_bought = []
     list_viewed = []
     list_put = []
@@ -84,7 +85,6 @@ def product(product_id):
                            list_put=list_put)
 
 
-
 @app.route('/cart')
 def cart():
     global CARTS
@@ -96,19 +96,21 @@ def cart():
     return render_template('cart.html',
                            cart=cart_session,
                            total_price=total_price,
-                           number_of_items=cart_session.num_of_items)
+                           number_of_items=cart_session.num_of_items,
+                           user_id=session['id'])
 
 
 @app.route('/checkout')
 def checkout():
-    return render_template('check.out.html')
+    
+    return render_template('checkout.html')
 
 
 @app.route('/buy')
 def buy():
     global CARTS
-    CARTS.buy()
-    del CARTS[session['id']]
+
+    CARTS[session['id']].buy()
     return redirect('/catalog')
 
 
@@ -116,10 +118,11 @@ def buy():
 def add():
     if request.method == 'POST':
         image = request.files["add_to_shop_image"]
-        image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
-
-        DATABASE.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
-                     request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
+        if image and allowed_file(image.filename):
+            image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
+        if request.form["add_to_shop_name"] != "" and request.form["add_to_shop_about"] != "" and request.form["add_to_shop_price"] != "":
+            DATABASE.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
+                                        request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
 
     return redirect('/admin')
 
@@ -131,6 +134,15 @@ def add_to_cart():
         product_id = request.form['id']
         CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
     return redirect(request.form['from'])
+
+
+@app.route('/remove_from_cart/id=<int:product_id>', methods=['GET'])
+def remove_from_cart(product_id):
+    global CARTS
+    print(product_id)
+    CARTS[session['id']].remove(int(product_id))
+    print(4)
+    return "ok"
 
 
 @app.route('/catalog')

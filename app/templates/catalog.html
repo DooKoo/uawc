@@ -10,7 +10,7 @@
             <div id="line">
                 {% for item in line_1 %}
 				<div id="item">
-					<div id="item_image" align="center"><img src="{{item.photo}}" height="100"></div>
+					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
 						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
 						<div id="item_price"><b>{{item.price}}</b></div>
@@ -22,7 +22,7 @@
             <div id="line">
                 {% for item in line_2 %}
 				<div id="item">
-					<div id="item_image" align="center"><img src="{{item.photo}}" height="100"></div>
+					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
 						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
 						<div id="item_price"><b>{{item.price}}</b></div>
@@ -34,7 +34,7 @@
             <div id="line">
                 {% for item in line_3 %}
 				<div id="item">
-					<div id="item_image" align="center"><img src="{{item.photo}}" height="100"></div>
+					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
 						<div id="item_name"><a href="/product={{item.id}}">{{item.name}}</a></div>
 						<div id="item_price"><b>{{item.price}}</b></div>

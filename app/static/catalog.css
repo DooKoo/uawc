@@ -5,6 +5,7 @@
 #item {
 	width: 33%;
 	float: left;
+	height: 225px;
 	border: 1px solid #000;
 	cursor: default;
 }

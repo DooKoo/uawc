@@ -9,6 +9,7 @@ DATABASE = db.DBwork()
 USERS_ON_SITE = 0
 CARTS = {}
 
+
 # APP_ROOT = os.path.join(os.path.abspath(__file__))
 UPLOADER_FOLDER = './app/static/images/products/'
 app.config['UPLOAD_FOLDER'] = UPLOADER_FOLDER
@@ -66,7 +67,7 @@ def product(product_id):
     list_put = []
 
     for product_id in models.Product.from_json(product_db).get_products_with(1):
-        list_bought.append(DATABASE.get_product(int(product_id)))
+        list_bought.append(DATABASE.get_product(product_id))
     for product_id in models.Product.from_json(product_db).get_products_with(2):
         list_viewed.append(DATABASE.get_product(int(product_id)))
     for product_id in models.Product.from_json(product_db).get_products_with(3):

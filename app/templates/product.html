@@ -29,7 +29,7 @@
 		<div id="recommended">
             {% for item in list_bought %}
 			<div id="recommended_item">
-				<div id="recommended_item_image"><img src={{item.photo}} width="80"></div>
+				<div id="recommended_item_image"><img src={{item.photo}} height="100"></div>
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
 					<div id="recommended_price"><b>{{item.price}}</b></div>
@@ -42,7 +42,7 @@
         <div id="recommended">
             {% for item in list_viewed %}
 			<div id="recommended_item">
-				<div id="recommended_item_image"><img src={{item.photo}} width="80"></div>
+				<div id="recommended_item_image"><img src={{item.photo}} height="100"></div>
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
 					<div id="recommended_price"><b>{{item.price}}</b></div>
@@ -55,7 +55,7 @@
         <div id="recommended">
             {% for item in list_put %}
 			<div id="recommended_item">
-				<div id="recommended_item_image"><img src={{item.photo}} width="80"></div>
+				<div id="recommended_item_image"><img src={{item.photo}} height="100"></div>
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
 					<div id="recommended_price"><b>{{item.price}}</b></div>

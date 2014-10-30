@@ -45,10 +45,12 @@
 #recommended {
 	margin-left: 20px;
 	border-bottom: 1px solid #000;
+	height: 130px;
 }
 
 #recommended_item {
 	width: 25%;
+	float: left;
 	height: 130px;
 }
 

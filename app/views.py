@@ -104,6 +104,14 @@ def checkout():
     return render_template('check.out.html')
 
 
+@app.route('/buy')
+def buy():
+    global CARTS
+    CARTS.buy()
+    del CARTS[session['id']]
+    return redirect('/catalog')
+
+
 @app.route('/add', methods=['POST'])
 def add():
     if request.method == 'POST':

@@ -40,10 +40,10 @@ def sign_in():
 
         USERS_ON_SITE += 1
         CARTS = {session['id']: models.Cart()}
-        print("User: "+session['id']+" logged;")
+        print("User: "+str(session['id'])+" logged;")
+        print(CARTS.get(session['id']))
     else:
-        print("wtf?")
-
+        print("User:"+str(session['id'])+"work!")
 
 
 @app.errorhandler(404)
@@ -56,7 +56,7 @@ def product(product_id):
     sign_in()
 
     global CARTS
-    cart_session = CARTS[session['id']]
+    cart_session = CARTS.get(session['id'])
 
     try:
         product_db = DATABASE.get_product(product_id)
@@ -70,7 +70,7 @@ def product(product_id):
     list_put = []
 
     for product_id in models.Product.from_json(product_db).get_products_with(1):
-        list_bought.append(DATABASE.get_product(product_id))
+        list_bought.append(DATABASE.get_product(int(product_id)))
     for product_id in models.Product.from_json(product_db).get_products_with(2):
         list_viewed.append(DATABASE.get_product(int(product_id)))
     for product_id in models.Product.from_json(product_db).get_products_with(3):
@@ -106,7 +106,6 @@ def cart():
 
 @app.route('/checkout')
 def checkout():
-    
     return render_template('checkout.html')
 
 
@@ -114,7 +113,7 @@ def checkout():
 def buy():
     global CARTS
 
-    CARTS[session['id']].buy()
+    CARTS.get(session['id']).buy()
     return redirect('/catalog')
 
 
@@ -133,24 +132,17 @@ def add():
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():
-    print(1)
     global CARTS
-    print(2)
     if request.method == 'POST':
-        print(3)
         product_id = request.form['id']
-        print(product_id)
         CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
-        print(5)
     return redirect(request.form['from'])
 
 
 @app.route('/remove_from_cart/id=<int:product_id>', methods=['GET'])
 def remove_from_cart(product_id):
     global CARTS
-    print(product_id)
-    CARTS[session['id']].remove(int(product_id))
-    print(4)
+    CARTS.get(session['id']).remove(int(product_id))
     return "ok"
 
 
@@ -158,7 +150,7 @@ def remove_from_cart(product_id):
 def catalog(page):
     sign_in()
     id_products = DATABASE.get_catalog_products(page)
-    print(id_products)
+
     products__ = []
     for i in id_products:
         products__.append(models.Product.from_json(DATABASE.get_product(i)))
@@ -172,10 +164,19 @@ def catalog(page):
                            line_3=products_line_3)
 
 
-@app.route('/test')
+@app.route('/halt')
 def test():
-    session.clear()
-    return "ok"
+    if 'username' in session:
+        global CARTS
+        global USERS_ON_SITE
+
+        USERS_ON_SITE = 0
+        CARTS.clear()
+        session.clear()
+        return "ok"
+    else:
+        return "You need be admin"
+
 
 
 @app.route('/')

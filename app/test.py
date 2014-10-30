@@ -1,5 +1,8 @@
 from app import models, db
-
 test = db.DBwork()
-print(test.get_catalog_products(1))
-
+for j in range(0, 100):
+    try:
+        test.db.products.find({'id': j})[1]
+        print('ahtung')
+    except Exception:
+        print("ok")

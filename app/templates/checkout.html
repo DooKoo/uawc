@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="checkout.css" type="text/css">
+		<script type="text/javascript" src="jquery-2.1.1.js"></script>
+<script type="text/javascript">
+function validate_form ( ) {
+valid = true;
+    if ( document.checkout_form.buyer_name.value == "" )
+    {
+		$("#error:hidden").show();
+        valid = false;
+    }
+    return valid;
+}
+</script>
+	</head>
+	<body>
+		<div class="checkout" onsubmit="return validate_form ( );" align="center">
+			<div id="error">You haven't entered name!</div>
+			<form name="checkout_form">
+				Enter Your name	<input type="text" name="buyer_name" id="buyer_name" /><br>
+				<input type="submit" name="buy_send" id="buy_send" value="Buy" />
+			</form>
+		</div>
+	</body>
+</html>

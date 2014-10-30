@@ -39,5 +39,18 @@ class DBwork:
         for i in tmp:
             all_products_info.append({'id': i['id'], 'buys': i['buys'], 'views': i['views'], 'carts': i['carts']})
 
-        print(all_products_info)
+        sorted_list = sorted(all_products_info, key=lambda k: (k['buys'], k['views'], k['carts']), reverse=True)
+        result = []
+
+        for i in range(page*9-9, page*9):
+            try:
+                result.append(sorted_list[i]['id'])
+            except Exception:
+                break
+
+        return result
+
+    def count(self):
+        return round(self.db.products.count()/9)
+
 

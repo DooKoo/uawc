@@ -128,9 +128,6 @@ class Cart:
         data_base.close()
         self.items.clear()
 
-    def remove(self, product_id):
-        data_base = db.DBwork()
-        for item in self.items:
-            if item.id == product_id:
-                self.items.remove(Product.from_json(data_base.get_product(item)))
-                self.num_of_items -= 1
+    def remove(self, id_in_cart):
+        del self.items[id_in_cart]
+        self.num_of_items -= 1

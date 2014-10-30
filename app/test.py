@@ -1,7 +1,5 @@
 from app import models, db
 
 test = db.DBwork()
+print(test.get_catalog_products(1))
 
-cart = models.Cart()
-
-test.get_catalog_products(1)

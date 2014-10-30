@@ -1,3 +1,38 @@
+#error_name {
+	padding: 10px;
+	background-color: red;
+	display: none;
+	width: 200px;
+}
+
+#error_description {
+	padding: 10px;
+	background-color: red;
+	display: none;
+	width: 200px;
+}
+
+#error_price_exist {
+	padding: 10px;
+	background-color: red;
+	display: none;
+	width: 200px;
+}
+
+#error_price_invalid {
+	padding: 10px;
+	background-color: red;
+	display: none;
+	width: 200px;
+}
+
+#error_price_invalid {
+	padding: 10px;
+	background-color: red;
+	display: none;
+	width: 200px;
+}
+
 #leftbar {
 	width: 250px;
 	float: left;

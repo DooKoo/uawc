@@ -1,54 +1,54 @@
 import os
 from app import app
-from flask import request, render_template, session, flash, redirect, escape
+from flask import request, render_template, session, redirect
 from app import models
 from app import db
-from werkzeug.exceptions import HTTPException, NotFound
+
+
+#------------------------
+#   GLOBAL VARIABLES    |
+#------------------------
+
 
 DATABASE = db.DBwork()
 USERS_ON_SITE = 0
 CARTS = {}
-
-
-# APP_ROOT = os.path.join(os.path.abspath(__file__))
 UPLOADER_FOLDER = './app/static/images/products/'
+
+#--------------------
+#      CONFIGS      |
+#--------------------
+
 app.config['UPLOAD_FOLDER'] = UPLOADER_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
 
-
-def validate(user, passw):
-    if user == 'admin' and passw == '000':
-        return True
-    else:
-        return False
+#--------------------
+#       PAGES       |
+#--------------------
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+@app.route('/')
+@app.route('/catalog')
+def main():
+    return redirect('/catalog=1')
 
 
-def view(request):
-    raise NotFound()
+@app.route('/catalog=<int:page>')
+def catalog(page):
+    sign_in()
+    id_products = DATABASE.get_catalog_products(page)
 
+    products__ = []
+    for i in id_products:
+        products__.append(models.Product.from_json(DATABASE.get_product(i)))
 
-def sign_in():
-    global USERS_ON_SITE
-    global CARTS
-    if 'id' not in session:
-        session['id'] = USERS_ON_SITE
-
-        USERS_ON_SITE += 1
-        CARTS = {session['id']: models.Cart()}
-        print("User: "+str(session['id'])+" logged;")
-        print(CARTS.get(session['id']))
-    else:
-        print("User:"+str(session['id'])+"work!")
-
-
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template('page_not_found.html')
+    products_line_1 = products__[:3]
+    products_line_2 = products__[3:6]
+    products_line_3 = products__[6:]
+    return render_template('catalog.html',
+                           line_1=products_line_1,
+                           line_2=products_line_2,
+                           line_3=products_line_3)
 
 
 @app.route('/product=<int:product_id>', methods=['GET'])
@@ -109,6 +109,46 @@ def checkout():
     return render_template('checkout.html')
 
 
+@app.errorhandler(404)
+def page_not_found():
+    return render_template('page_not_found.html')
+
+
+#----------------
+#      API      |
+#----------------
+
+
+def sign_in():
+    global USERS_ON_SITE
+    global CARTS
+    if 'id' not in session:
+        session['id'] = USERS_ON_SITE
+
+        USERS_ON_SITE += 1
+        CARTS = {session['id']: models.Cart()}
+        print("User: "+str(session['id'])+" logged;")
+        print(CARTS.get(session['id']))
+    else:
+        print("User:"+str(session['id'])+"work!")
+
+
+@app.route('/remove_from_cart/id=<int:product_id>', methods=['GET'])
+def remove_from_cart(product_id):
+    global CARTS
+    CARTS.get(session['id']).remove(int(product_id))
+    return "ok"
+
+
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    global CARTS
+    if request.method == 'POST':
+        product_id = request.form['id']
+        CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
+    return redirect(request.form['from'])
+
+
 @app.route('/buy')
 def buy():
     global CARTS
@@ -116,6 +156,29 @@ def buy():
     CARTS.get(session['id']).buy()
     return redirect('/catalog')
 
+#---------------------------------
+#   FUNCTION OF ADMINISTRATION   |
+#---------------------------------
+
+
+def validate(user, passw):
+    if user == 'admin' and passw == '000':
+        return True
+    else:
+        return False
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
+@app.route('/admin')
+def admin():
+    if 'username' in session:
+        return render_template('admin.html', invisible_overwrite='')
+    else:
+        return render_template('login.html', invisible_overwrite='')
 
 @app.route('/add', methods=['POST'])
 def add():
@@ -128,64 +191,6 @@ def add():
                                         request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
 
     return redirect('/admin')
-
-
-@app.route('/add_to_cart', methods=['POST'])
-def add_to_cart():
-    global CARTS
-    if request.method == 'POST':
-        product_id = request.form['id']
-        CARTS.get(session['id']).add(models.Product.from_json(DATABASE.get_product(int(product_id))))
-    return redirect(request.form['from'])
-
-
-@app.route('/remove_from_cart/id=<int:product_id>', methods=['GET'])
-def remove_from_cart(product_id):
-    global CARTS
-    CARTS.get(session['id']).remove(int(product_id))
-    return "ok"
-
-
-@app.route('/catalog=<int:page>')
-def catalog(page):
-    sign_in()
-    id_products = DATABASE.get_catalog_products(page)
-
-    products__ = []
-    for i in id_products:
-        products__.append(models.Product.from_json(DATABASE.get_product(i)))
-
-    products_line_1 = products__[:3]
-    products_line_2 = products__[3:6]
-    products_line_3 = products__[6:]
-    return render_template('catalog.html',
-                           line_1=products_line_1,
-                           line_2=products_line_2,
-                           line_3=products_line_3)
-
-
-@app.route('/halt')
-def test():
-    if 'username' in session:
-        global CARTS
-        global USERS_ON_SITE
-
-        USERS_ON_SITE = 0
-        CARTS.clear()
-        session.clear()
-        return "ok"
-    else:
-        return "You need be admin"
-
-
-
-@app.route('/')
-@app.route('/admin')
-def admin():
-    if 'username' in session:
-        return render_template('admin.html', invisible_overwrite='')
-    else:
-        return render_template('login.html', invisible_overwrite='')
 
 
 @app.route('/login', methods=['POST'])
@@ -211,3 +216,17 @@ def logout():
     session.clear()
 
     return redirect('/catalog')
+
+
+@app.route('/halt')
+def test():
+    if 'username' in session:
+        global CARTS
+        global USERS_ON_SITE
+
+        USERS_ON_SITE = 0
+        CARTS.clear()
+        session.clear()
+        return "ok"
+    else:
+        return "You need be admin"

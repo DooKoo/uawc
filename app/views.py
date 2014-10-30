@@ -4,8 +4,6 @@ from flask import request, render_template, session, flash, redirect, escape
 from app import models
 from app import db
 from werkzeug.exceptions import HTTPException, NotFound
-from werkzeug.wsgi import responder
-from werkzeug.wrappers import BaseRequest
 
 DATABASE = db.DBwork()
 USERS_ON_SITE = 0
@@ -56,7 +54,11 @@ def product(product_id):
     global CARTS
     cart_session = CARTS[session['id']]
 
-    product_db = DATABASE.get_product(product_id)
+    try:
+        product_db = DATABASE.get_product(product_id)
+    except IndexError:
+        return render_template('page_not_found.html')
+
     product_db['views'] += 1
     list_bought = []
     list_viewed = []
@@ -82,10 +84,10 @@ def product(product_id):
                            list_put=list_put)
 
 
+
 @app.route('/cart')
 def cart():
     global CARTS
-
     sign_in()
     cart_session = CARTS.get(session['id'])
     total_price = 0
@@ -96,6 +98,7 @@ def cart():
                            total_price=total_price,
                            number_of_items=cart_session.num_of_items)
 
+
 @app.route('/checkout')
 def checkout():
     return render_template('check.out.html')
@@ -103,7 +106,6 @@ def checkout():
 
 @app.route('/add', methods=['POST'])
 def add():
-
     if request.method == 'POST':
         image = request.files["add_to_shop_image"]
         image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))

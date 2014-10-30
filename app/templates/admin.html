@@ -1,16 +1,11 @@
 {% extends 'outlay.html' %}
-{% block title %}Control Bar{% endblock %}
+{% block title %}Control Panel{% endblock %}
 {% block head %}
 	<link rel="stylesheet" href="/static/styles.css" type="text/css">
 	<script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
 {% endblock %}
 {% block header %}{% endblock %}
 {% block content %}
-	<div id="leftbar">
-		<div id="navigation">
-			<a class='navelement' onclick="$('#viewshop:hidden').show()">View items</a>
-			<a class='navelement' onclick="$('#add_to_shop:hidden').show()">Add item</a>
-		</div>
 	</div>
 	<div id="add_to_shop_form">
                 <form action="/add" enctype="multipart/form-data" method="post">

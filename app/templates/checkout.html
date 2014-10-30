@@ -1,7 +1,9 @@
-<html>
-	<head>
-		<link rel="stylesheet" href="checkout.css" type="text/css">
-		<script type="text/javascript" src="jquery-2.1.1.js"></script>
+{% extends 'outlay.html' %}
+{% block head %}
+		<link rel="stylesheet" href="static/checkout.css" type="text/css">
+        <link rel="script" href="static/main.js" type="script">
+		<script type="text/javascript" src="static/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="static/main.js"></script>
 <script type="text/javascript">
 function validate_form ( ) {
 valid = true;
@@ -13,14 +15,14 @@ valid = true;
     return valid;
 }
 </script>
-	</head>
-	<body>
+{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
 		<div class="checkout" onsubmit="return validate_form ( );" align="center">
 			<div id="error">You haven't entered name!</div>
-			<form name="checkout_form">
 				Enter Your name	<input type="text" name="buyer_name" id="buyer_name" /><br>
-				<input type="submit" name="buy_send" id="buy_send" value="Buy" />
-			</form>
+				<input type="submit" name="buy_send" id="buy_send" value="Buy" onclick="document.location.href='/buy'"/>
+
 		</div>
-	</body>
-</html>
+{% endblock %}

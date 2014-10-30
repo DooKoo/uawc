@@ -21,12 +21,11 @@
 				<div class="name">{{name}}</div>
 				<div class="price"><b>{{price}}</b></div>
 				<div class="description">{{description}}</div>
-			<div class="add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{id}})" /></div>
+			<div class="add_to_cart_button"><input type="button" name="add_to_cart_button" id="add_to_cart_button" value="Add to cart" onclick="add_to_cart({{id}});"/></div>
 			</div>
 		</div>
 {% endblock %}
 {% block recommended %}
-
 		<div id="recommended">
             {% for item in list_bought %}
 			<div id="recommended_item">
@@ -34,7 +33,7 @@
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
 					<div id="recommended_price"><b>{{item.price}}</b></div>
-					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart2" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
+					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}})"/></div>
 				</div>
 			</div>
             {% endfor %}
@@ -47,7 +46,7 @@
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
 					<div id="recommended_price"><b>{{item.price}}</b></div>
-					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart2" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
+					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
 				</div>
 			</div>
             {% endfor %}
@@ -60,7 +59,7 @@
 				<div id="recommended_item_text">
 					<div id="recommended_name">{{item.name}}</div>
 					<div id="recommended_price"><b>{{item.price}}</b></div>
-					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart2" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
+					<div id="recommended_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
 				</div>
 			</div>
             {% endfor %}

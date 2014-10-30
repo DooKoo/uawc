@@ -82,11 +82,10 @@ def product(product_id):
                            list_put=list_put)
 
 
-
 @app.route('/cart')
 def cart():
     global CARTS
-    cart_session = CARTS
+
     sign_in()
     cart_session = CARTS.get(session['id'])
     total_price = 0

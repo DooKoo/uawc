@@ -1,6 +1,7 @@
 from operator import itemgetter
-import random
 from collections import OrderedDict
+from app import db
+import random
 
 
 class Product:
@@ -101,21 +102,30 @@ class Cart:
         self.items = []
 
     def add(self, new_item):
-        self.items.append(new_item)
+        data_base = db.DBwork()
         new_item.num_carts += 1
         for item in self.items:
-            if item != new_item:
                 item.add_cart_with(new_item.id)
                 new_item.add_cart_with(item.id)
+
+        self.items.append(new_item)
+        for item in self.items:
+            data_base.update_product(item.id, item)
+        data_base.close()
         self.num_of_items += 1
 
     #need a test
     def buy(self):
+        data_base = db.DBwork()
         for item in self.items:
             item.num_buys += 1
             for item2 in self.items:
                 if item != item2:
                     item.add_buys_with(item2.id)
+
+        for item in self.items:
+            data_base.update_product(item.id, item)
+        data_base.close()
         self.items.clear()
 
     def remove(self, product):

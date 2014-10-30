@@ -40,7 +40,10 @@ def sign_in():
 
         USERS_ON_SITE += 1
         CARTS = {session['id']: models.Cart()}
-        return redirect('/catalog')
+        print("User: "+session['id']+" logged;")
+    else:
+        print("wtf?")
+
 
 
 @app.errorhandler(404)

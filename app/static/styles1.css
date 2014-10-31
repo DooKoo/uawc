@@ -41,6 +41,11 @@
 	font-size: 14px;
 }
 
+.number_of_items {
+    font-size: 14px;
+    color: #FF00FF;
+}
+
 .logout {
 	float: right;
 	margin-right: -100px;

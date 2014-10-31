@@ -36,7 +36,10 @@ def main():
 
 @app.route('/catalog=<int:page>')
 def catalog(page):
+
     sign_in()
+    global CARTS
+    cart_session = CARTS.get(session['id'])
     id_products = DATABASE.get_catalog_products(page)
 
     products__ = []
@@ -51,8 +54,8 @@ def catalog(page):
                            line_2=products_line_2,
                            line_3=products_line_3,
                            id_current_page=page,
-                           id_last_page=DATABASE.last_page()
-                           )
+                           id_last_page=DATABASE.last_page(),
+                           number_of_items=cart_session.num_of_items)
 
 
 @app.route('/product=<int:_id>', methods=['GET'])
@@ -121,7 +124,10 @@ def cart():
 
 @app.route('/checkout')
 def checkout():
-    return render_template('checkout.html')
+    global CARTS
+    cart_session = CARTS.get(session['id'])
+    return render_template('checkout.html',
+                           number_of_items=cart_session.num_of_items)
 
 
 @app.errorhandler(404)

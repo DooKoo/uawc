@@ -8,18 +8,9 @@
     {% set id_previous_page = id_current_page - 1 %}
     {% set id_next_page = id_current_page + 1 %}
         {{id_current_page}}
+{% block number_of_items %}{{number_of_items}}{% endblock %}
 {% block content %}
 		<div class="page">
-			<div id="buttons_navigation">
-			{% block top_nav %}
-				{% if id_current_page != 1 %}
-					<button id="Previous_button" onclick="to_page({{id_previous_page}});">Previous page</button>
-				{% endif %}
-				{% if id_current_page != id_last_page %}
-					<button id="Next_button" onclick="to_page({{id_next_page}})">Next page</button>
-				{% endif %}
-				{% endblock %}
-			</div>
             <div id="line">
                 {% for item in line_1 %}
 				<div id="item">
@@ -66,7 +57,7 @@
                         <button id="Next_button" onclick="to_page({{id_next_page}})">Next page</button>
                     {% endif %}
                 {% endblock %}
-                </div>
+            </div>
         </div>
 
 

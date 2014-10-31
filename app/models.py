@@ -86,13 +86,16 @@ class Product:
 
         sorted_tmp = list(OrderedDict(sorted(tmp.items(), key=itemgetter(1))).keys())[:10]
         result = []
+        alt_ids = [0, 1, 2, 3]
         for i in range(0, 4):
             if len(sorted_tmp) != 0:
                 choice = random.choice(sorted_tmp)
                 result.append(choice)
                 sorted_tmp.remove(choice)
             else:
-                result = [0, 1, 2, 3]
+                choice = random.choice(alt_ids)
+                result.append(choice)
+                alt_ids.remove(choice)
         return result
 
 
@@ -105,6 +108,7 @@ class Cart:
         data_base = db.DBwork()
         new_item.num_carts += 1
         for item in self.items:
+            if item.id != new_item.id:
                 item.add_cart_with(new_item.id)
                 new_item.add_cart_with(item.id)
 
@@ -120,11 +124,12 @@ class Cart:
         for item in self.items:
             item.num_buys += 1
             for item2 in self.items:
-                if item != item2:
+                if item.id != item2.id:
                     item.add_buys_with(item2.id)
 
         for item in self.items:
             data_base.update_product(item.id, item)
+
         data_base.close()
         self.items.clear()
 

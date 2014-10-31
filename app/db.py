@@ -17,7 +17,7 @@ class DBwork:
 
     def add(self, new_product):
         product_id = {
-            "id": self.count
+            "id": self.db.products.count()
         }
         self.db.products.insert(dict(list(product_id.items()) + list(new_product.to_json().items())))
         self.count += 1

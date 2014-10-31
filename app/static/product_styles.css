@@ -3,14 +3,11 @@
 }
 
 .about_item  {
-	margin-left: 20px;
-	margin-bottom: 50px;
-	margin-top: 40px;
+	margin: 40px 50px 50px;
 	min-height: 410px;
 }
 
 .left {
-	width: 200px;
 	float: left;
 }
 
@@ -19,7 +16,7 @@
 }
 
 .item_image {
-	
+    padding-right: 15px;
 }
 
 .name {

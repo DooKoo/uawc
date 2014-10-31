@@ -13,6 +13,7 @@ from app import db
 DATABASE = db.DBwork()
 USERS_ON_SITE = 0
 CARTS = {}
+VIEWS = {}
 UPLOADER_FOLDER = './app/static/images/products/'
 
 #--------------------
@@ -51,23 +52,34 @@ def catalog(page):
                            line_3=products_line_3)
 
 
-@app.route('/product=<int:product_id>', methods=['GET'])
-def product(product_id):
+@app.route('/product=<int:_id>', methods=['GET'])
+def product(_id):
     sign_in()
 
     global CARTS
     cart_session = CARTS.get(session['id'])
 
     try:
-        product_db = DATABASE.get_product(product_id)
+        product_db = DATABASE.get_product(_id)
     except IndexError:
         return render_template('page_not_found.html')
 
     product_db['views'] += 1
 
+    global VIEWS
+    obj_product = models.Product.from_json(product_db)
+    for i in VIEWS.get(session['id']):
+        i.add_viewed_with(_id)
+        DATABASE.update_product(i.id, i)
+        obj_product.add_viewed_with(i.id)
+
+    VIEWS.get(session['id']).append(obj_product)
+
     list_bought = []
     list_viewed = []
     list_put = []
+
+    product_db = dict(list({'id': _id}.items()) + list(obj_product.to_json().items()))
 
     for product_id in models.Product.from_json(product_db).get_products_with(1):
         list_bought.append(DATABASE.get_product(int(product_id)))
@@ -76,7 +88,7 @@ def product(product_id):
     for product_id in models.Product.from_json(product_db).get_products_with(3):
         list_put.append(DATABASE.get_product(int(product_id)))
 
-    DATABASE.update_product(product_id, models.Product.from_json(product_db))
+    DATABASE.update_product(_id, models.Product.from_json(product_db))
     return render_template('product.html',
                            name=product_db['name'],
                            address=product_db['photo'],
@@ -110,7 +122,7 @@ def checkout():
 
 
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(error):
     return render_template('page_not_found.html')
 
 
@@ -122,11 +134,13 @@ def page_not_found():
 def sign_in():
     global USERS_ON_SITE
     global CARTS
+    global VIEWS
     if 'id' not in session:
         session['id'] = USERS_ON_SITE
 
         USERS_ON_SITE += 1
         CARTS = {session['id']: models.Cart()}
+        VIEWS = {session['id']: []}
         print("User: "+str(session['id'])+" logged;")
         print(CARTS.get(session['id']))
     else:
@@ -217,7 +231,7 @@ def logout():
 
     return redirect('/catalog')
 
-
+'''
 @app.route('/halt')
 def test():
     if 'username' in session:
@@ -230,3 +244,4 @@ def test():
         return "ok"
     else:
         return "You need be admin"
+'''

@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import math
 
 
 class DBwork:
@@ -50,7 +51,7 @@ class DBwork:
 
         return result
 
-    def count(self):
-        return round(self.db.products.count()/9)
+    def last_page(self):
+        return math.ceil(self.db.products.count()/9)
 
 

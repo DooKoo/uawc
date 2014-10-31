@@ -51,7 +51,7 @@ def catalog(page):
                            line_2=products_line_2,
                            line_3=products_line_3,
                            id_current_page=page,
-                           #id_last_page= ???                   <------
+                           id_last_page=DATABASE.last_page()
                            )
 
 
@@ -229,18 +229,3 @@ def logout():
     session.clear()
 
     return redirect('/catalog')
-
-'''
-@app.route('/halt')
-def test():
-    if 'username' in session:
-        global CARTS
-        global USERS_ON_SITE
-
-        USERS_ON_SITE = 0
-        CARTS.clear()
-        session.clear()
-        return "ok"
-    else:
-        return "You need be admin"
-'''

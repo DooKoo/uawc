@@ -49,7 +49,10 @@ def catalog(page):
     return render_template('catalog.html',
                            line_1=products_line_1,
                            line_2=products_line_2,
-                           line_3=products_line_3)
+                           line_3=products_line_3,
+                           id_current_page=page,
+                           #id_last_page= ???                   <------
+                           )
 
 
 @app.route('/product=<int:_id>', methods=['GET'])
@@ -141,10 +144,6 @@ def sign_in():
         USERS_ON_SITE += 1
         CARTS = {session['id']: models.Cart()}
         VIEWS = {session['id']: []}
-        print("User: "+str(session['id'])+" logged;")
-        print(CARTS.get(session['id']))
-    else:
-        print("User:"+str(session['id'])+"work!")
 
 
 @app.route('/remove_from_cart/id=<int:product_id>', methods=['GET'])

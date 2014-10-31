@@ -2,46 +2,60 @@
 {% block head %}
 	<link rel="stylesheet" href="/static/catalog.css" type="text/css">
     <link rel="stylesheet" href="/static/styles1.css" type="text/css">
+    <script type="text/javascript" src="/static/main.js"></script>
+    <script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
 {% endblock %}
-{% block header %}{{super()}}{% endblock %}
+    {% set id_previous_page = id_current_page - 1 %}
+    {% set id_next_page = id_current_page + 1 %}
+        {{id_current_page}}
 {% block content %}
 		<div class="page">
             <div id="line">
                 {% for item in line_1 %}
-				<div id="item" onclick="document.location.href = '/product={{item.id}}';">
-					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
+				<div id="item">
+					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100" onclick="proceed_to_item({{item.id}});"></div>
 					<div id="item_text">
-						<div id="item_name">{{item.name}}</div>
-						<div id="item_price"><b>${{item.price}}</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
+						<div id="item_name" onclick="proceed_to_item({{item.id}});">{{item.name}}</div>
+						<div id="item_price" onclick="proceed_to_item({{item.id}});"><b>${{item.price}}</b></div>
+						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart"  value="Add to cart" onclick="add_to_cart({{item.id}});"/></div>
 					</div>
 				</div>
                 {% endfor %}
 			</div>
             <div id="line">
                 {% for item in line_2 %}
-				<div id="item" onclick="document.location.href = '/product={{item.id}}';">
-					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
+				<div id="item">
+					<div id="item_image" onclick="proceed_to_item({{item.id}});" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name">{{item.name}}</div>
-						<div id="item_price"><b>${{item.price}}</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
+						<div id="item_name" onclick="proceed_to_item({{item.id}});">{{item.name}}</div>
+						<div id="item_price" onclick="proceed_to_item({{item.id}});"><b>${{item.price}}</b></div>
+						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart"  value="Add to cart" onclick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
                 {% endfor %}
 			</div>
             <div id="line">
                 {% for item in line_3 %}
-				<div id="item" onclick="document.location.href = '/product={{item.id}}';">
-					<div id="item_image" align="center"><img src="{{item.path_photo}}" height="100"></div>
+				<div id="item">
+					<div id="item_image" onclick="proceed_to_item({{item.id}});" align="center"><img src="{{item.path_photo}}" height="100"></div>
 					<div id="item_text">
-						<div id="item_name">{{item.name}}</div>
-						<div id="item_price"><b>${{item.price}}</b></div>
-						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" id="add_to_cart" value="Add to cart" onlick="add_to_cart({{item.id}})"/></div>
+						<div id="item_name" onclick="proceed_to_item({{item.id}});">{{item.name}}</div>
+						<div id="item_price" onclick="proceed_to_item({{item.id}});"><b>${{item.price}}</b></div>
+						<div id="item_add_to_cart_button"><input type="button" name="add_to_cart" value="Add to cart" onclick="add_to_cart({{item.id}})"/></div>
 					</div>
 				</div>
                 {% endfor %}
 			</div>
+
 		</div>
 {% endblock %}
-
+<div id="buttons_navigation">
+{% block bottom_nav %}
+    {% if id_current_page != 1 %}
+        <button id="Previous_button" onclick="to_page({{id_previous_page}});">Previous page</button>
+    {% endif %}
+    {% if id_current_page != id_last_page %}
+        <button id="Next_button" onclick="to_page({{id_next_page}})">Next page</button>
+    {% endif %}
+{% endblock %}
+</div>

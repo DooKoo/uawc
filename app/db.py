@@ -11,7 +11,6 @@ class DBwork:
             print("Error. Database not found :(")
 
         self.db = self.host.shop
-        self.count = self.db.products.count()
 
     def close(self):
         self.host.close()
@@ -21,11 +20,9 @@ class DBwork:
             "id": self.db.products.count()
         }
         self.db.products.insert(dict(list(product_id.items()) + list(new_product.to_json().items())))
-        self.count += 1
 
     def remove(self, product_id):
         self.db.products.remove({"id": product_id})
-        self.count -= 1
 
     def get_product(self, product_id):
         return self.db.products.find({"id": product_id})[0]

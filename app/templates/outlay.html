@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Shop{% endblock %}</title>
     {% block head %}
     <meta charset="UTF-8">
     <script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
@@ -17,7 +17,7 @@
 					NexShop!
 				</div>
 				<div class="buy_header" onclick="document.location.href = '/cart';" style="cursor:pointer;">
-				<span class="buystyle">Your cart: </span><span class="number_of_items_in_cart">{% block number_of_items %}0{% endblock %}</span>
+				<span class="buystyle">Your cart: </span><span class="number_of_items">{% block number_of_items %}0{% endblock %}</span>
 				<img src="static/images/header/icon-basket.gif" />
 			</div>
 		</div>

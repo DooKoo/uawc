@@ -205,6 +205,7 @@ def admin():
     else:
         return render_template('login.html', invisible_overwrite='')
 
+
 @app.route('/add', methods=['POST'])
 def add():
     if request.method == 'POST':

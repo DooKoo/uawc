@@ -7,7 +7,7 @@
         <script type="text/javascript" src="static/main.js"></script>
 
 <script type="text/javascript">
-function validate_form ( ) {
+function validate_form(){
 valid = true;
     if ( document.checkout_form.buyer_name.value == "" )
     {
@@ -21,7 +21,7 @@ valid = true;
 {% block header %}{{super()}}{% endblock %}
 {% block number_of_items %}{{number_of_items}}{% endblock %}
 {% block content %}
-		<div class="checkout" onsubmit="return validate_form ( );" align="center">
+		<div class="checkout" onsubmit="return validate_form();" align="center">
 			<div id="error">You haven't entered name!</div>
 				Enter Your name	<input type="text" name="buyer_name" id="buyer_name" /><br>
 				<input type="submit" name="buy_send" id="buy_send" value="Buy" onclick="document.location.href='/buy'"/>

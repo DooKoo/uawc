@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="/static/styles.css" type="text/css">
 	<script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
 <script type="text/javascript">
-function validate_form ( ) {
+function validate_form(){
 valid = true;
     if ( document.add_item.add_to_shop_name.value == "" )
     {
@@ -41,8 +41,8 @@ valid = true;
 				<div id="error_description">You haven't entered description!</div>
 				<div id="error_price_exist">You haven't entered price!</div>
 				<div id="error_price_invalid">You have entered invalid price!</div>
-				<div id="error_price_invalid">You haven't chose picture!</div>
-                <form class="add_item" action="/add" enctype="multipart/form-data" method="post" onsubmit="return validate_form ( );">
+				<div id="error_picture_invalid">You haven't chose picture!</div>
+                <form class="add_item" action="/add" enctype="multipart/form-data" method="post" onsubmit="return validate_form();">
 				<table style="width: 100%">
 					<tr>
 						<td width="150px">Item name</td>

@@ -6,10 +6,12 @@
     <script type="text/javascript" src="static/main.js"></script>
     <script type="text/javascript" src="static/jquery-2.1.1.js"></script>
 {% endblock %}
+{% set index_of_item = -1 %}
 {% block number_of_items %}{{number_of_items}}{% endblock %}
 {% block content %}
 <div class="cart_items">
 		{% for item in cart.items %}
+        {% set index_of_item = index_of_item + 1 %}
         <div id="cart_item">
 				<div id="cart_item_image" align="center">
 					<img src="{{item.path_photo}}" onclick="proceed_to_item({{item.id}});" height="100" />
@@ -21,7 +23,7 @@
 					<div id="cart_item_price" onclick="proceed_to_item({{item.id}});">
 					${{item.price}}
 					</div>
-					<div id="remove_item"><input type="button" id="remove_button" name="remove_button" value="Remove" onclick="document.location.href='/remove_from_cart/id=tut_zminna'"/></div>
+					<div id="remove_item"><input type="button" id="remove_button" name="remove_button" value="Remove" onclick="document.location.href='/remove_from_cart/id={{index_of_item}}'"/></div>
 				</div>
 			</div>
 		{% endfor %}

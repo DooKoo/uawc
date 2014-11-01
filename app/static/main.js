@@ -1,6 +1,6 @@
 function add_to_cart(id){
     $.post('/add_to_cart', {id: id, from:window.location.toString()});
-    $.post('/in_cart').done(function(num){$('span.number_of_items').text(num)});
+    $.post('/in_cart').done(function(num){$('#span.number_of_items').text(num)});
 };
 
 function proceed_to_item(id){

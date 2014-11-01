@@ -8,6 +8,7 @@
         <script type="text/javascript" src="/static/jquery-2.1.1.js"></script>
         <script type="text/javascript" src="/static/main.js"></script>
 {% endblock %}
+{% set number_of_items_plus = number_of_items + 1 %}
 {% block number_of_items %}{{number_of_items}}{% endblock %}
 {% block content %}
         <div class="random">
@@ -20,7 +21,7 @@
 				<div class="name">{{name}}</div>
 				<div class="price"><b>${{price}}</b></div>
 				<div class="description">{{description}}</div>
-			<div class="add_to_cart_button"><input type="button" name="add_to_cart_button" id="add_to_cart_button" value="Add to cart" onclick="add_to_cart({{id}});"/></div>
+			<div class="add_to_cart_button"><input type="button" name="add_to_cart_button" id="add_to_cart_button" value="Add to cart" onclick="add_to_cart({{id}});change({{number_of_items_plus}});"/></div>
 			</div>
 		</div>
 {% endblock %}

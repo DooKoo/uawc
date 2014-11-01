@@ -156,7 +156,7 @@ def sign_in():
 def remove_from_cart(product_id):
     global CARTS
     CARTS.get(session['id']).remove(int(product_id))
-    return "ok"
+    return redirect('/cart')
 
 
 @app.route('/add_to_cart', methods=['POST'])
@@ -174,6 +174,12 @@ def buy():
 
     CARTS.get(session['id']).buy()
     return redirect('/catalog')
+
+
+@app.route('/in_cart', methods=['POST'])
+def in_cart():
+    global CARTS
+    return str(CARTS[session['id']].num_of_items)
 
 #---------------------------------
 #   FUNCTION OF ADMINISTRATION   |

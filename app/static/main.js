@@ -1,7 +1,8 @@
 function add_to_cart(id){
     $.post('/add_to_cart', {id: id, from:window.location.toString()});
-    //getElementById("number_of_items").innerHTML = + innerHTML + 1;
+    $.post('/in_cart').done(function(num){$('span.number_of_items').text(num)});
 };
+
 function proceed_to_item(id){
     document.location.href = "/product="+id;
 };
@@ -11,5 +12,5 @@ function to_page(id){
 };
 
 function remove_from_cart(id){
-    $.post('/remove_from_cart', {id: id});
+    $.get('/remove_from_cart/id='+id);
 };

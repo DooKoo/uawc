@@ -131,6 +131,7 @@ class Cart:
             data_base.update_product(item.id, item)
 
         data_base.close()
+        self.num_of_items = 0
         self.items.clear()
 
     def remove(self, id_in_cart):

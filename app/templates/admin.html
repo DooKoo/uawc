@@ -18,16 +18,8 @@ valid = true;
     }
 	if ( document.add_item.add_to_shop_price.value == "" )
     {
-		$("#error_price_exist:hidden").show();
-        valid = false;
-    }
-	if ( document.add_item.add_to_shop_price.value >= 0 )
-    {
-		if ( document.add_item.add_to_shop_price.value <= 1000000 )
-		{
-			$("#error_price_invalid:hidden").show();
-			valid = false;
-		}
+		$("#error_price:hidden").show();
+		valid = false;
     }
     return valid;
 }
@@ -36,14 +28,10 @@ valid = true;
 {% block header %}{% endblock %}
 {% block status %}{{alert}}{% endblock %}
 {% block content %}
-	</div>
-	<div id="add_to_shop_form">
-				<div id="error_name">You haven't entered name!</div>
-				<div id="error_description">You haven't entered description!</div>
-				<div id="error_price_exist">You haven't entered price!</div>
-				<div id="error_price_invalid">You have entered invalid price!</div>
-				<div id="error_picture_invalid">You haven't chose picture!</div>
-                <form class="add_item" action="/add" enctype="multipart/form-data" method="post" onsubmit="return validate_form();">
+		<div id="error_name">You haven't entered name!</div>
+		<div id="error_description">You haven't entered description!</div>
+				<div id="error_price">You haven't entered price!</div>
+                <form name="add_item" action="/add" enctype="multipart/form-data" method="post" onsubmit="return validate_form();">
 				<table style="width: 100%">
 					<tr>
 						<td width="150px">Item name</td>
@@ -57,14 +45,13 @@ valid = true;
 						<td>Item price</td>
 						<td><input type="text" name="add_to_shop_price" id="add_to_shop_price" /></td>
 					</tr>
+					<tr>
 						<td>Item picture</td>
 						<td><input type="file" name="add_to_shop_image" id="add_to_shop_image"  /></td>
 					</tr>
+					<tr>
 						<td><input type="submit" name="add_to_shop_send" id="add_to_shop_send" value="Upload" /></td>
 					</tr>
                 </table>
                 </form>
-			</div>
-		</div>
-	</div>
 {% endblock %}

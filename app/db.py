@@ -4,8 +4,8 @@ import math
 
 class DBwork:
     def __init__(self):
-        self.host = MongoClient('127.0.0.1:27017')
         try:
+            self.host = MongoClient('127.0.0.1:27017')
             self.host.shop.authenticate('dy23r876238vbce3', 'd92387gc7dy2398uc32')
         except Exception:
             print("Error. Database not found :(")

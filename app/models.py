@@ -122,13 +122,17 @@ class Cart:
     def buy(self):
         data_base = db.DBwork()
         for item in self.items:
+            item = Product.from_json(data_base.get_product(item.id))
             item.num_buys += 1
+            data_base.update_product(item.id, item)
             for item2 in self.items:
                 if item.id != item2.id:
+                    item = Product.from_json(data_base.get_product(item.id))
+                    item2 = Product.from_json(data_base.get_product(item2.id))
                     item.add_buys_with(item2.id)
-
-        for item in self.items:
-            data_base.update_product(item.id, item)
+                    item2.add_buy_with(item.id)
+                    data_base.update_product(item.id, item)
+                    data_base.update_product(item2.id, item2)
 
         data_base.close()
         self.num_of_items = 0

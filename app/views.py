@@ -186,6 +186,13 @@ def in_cart():
 #---------------------------------
 
 
+def check_for_price(price):
+    try:
+        price_of_item = float(price)
+    except ValueError:
+        print('not a float number') # <---- error wrong input
+
+
 def validate(user, passw):
     if user == 'admin' and passw == '000':
         return True
@@ -199,11 +206,13 @@ def allowed_file(filename):
 
 
 @app.route('/admin')
-def admin():
+def admin(alert=''):
     if 'username' in session:
-        return render_template('admin.html', invisible_overwrite='')
+        return render_template('admin.html', invisible_overwrite='',
+                               alert=alert)
     else:
-        return render_template('login.html', invisible_overwrite='')
+        pass
+    return render_template('login.html', invisible_overwrite='')
 
 
 @app.route('/add', methods=['POST'])
@@ -212,11 +221,19 @@ def add():
         image = request.files["add_to_shop_image"]
         if image and allowed_file(image.filename):
             image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
+        else:
+            return admin("Product wasn't added due to wrong extension of image or no image file was found")
         if request.form["add_to_shop_name"] != "" and request.form["add_to_shop_about"] != "" and request.form["add_to_shop_price"] != "":
-            DATABASE.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
-                                        request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
-
-    return redirect('/admin')
+            if check_for_price(request.form['add_to_shop_price']):
+                DATABASE.add(models.Product(request.form["add_to_shop_name"], request.form["add_to_shop_about"],
+                             request.form["add_to_shop_price"], app.config['UPLOAD_FOLDER'][5:]+image.filename))
+                return admin("ok")
+            else:
+                return admin("Product wasn't added due to wrong type of input, price should be a number")
+        else:
+            return admin("Product wasn't added, one of the fields to input is empty")
+    else:
+        return admin("Invalid method")
 
 
 @app.route('/login', methods=['POST'])
